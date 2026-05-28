@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Imran Mirza | Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #07080d;
+      --surface: #0f1118;
+      --surface2: #161925;
+      --border: #1f2535;
+      --text: #e8ecf5;
+      --muted: #6b7599;
+      --accent: #3be8b0;
+      --accent2: #5c7cfa;
+      --accent3: #f0a04b;
+      --heading-font: 'Syne', sans-serif;
+      --body-font: 'DM Sans', sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--body-font);
+      font-size: 16px;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+      opacity: 0.025;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 4rem;
+      backdrop-filter: blur(16px);
+      background: rgba(7, 8, 13, 0.75);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: var(--heading-font);
+      font-weight: 800;
+      font-size: 1.1rem;
+      color: var(--accent);
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 8rem 4rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-glow {
+      position: absolute;
+      width: 700px; height: 700px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(59,232,176,0.07) 0%, transparent 70%);
+      top: -100px; right: -200px;
+      pointer-events: none;
+    }
+    .hero-glow2 {
+      position: absolute;
+      width: 500px; height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(92,124,250,0.06) 0%, transparent 70%);
+      bottom: 0; left: 100px;
+      pointer-events: none;
+    }
+    .hero-tag {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      border: 1px solid rgba(59,232,176,0.3);
+      padding: 0.35rem 0.9rem;
+      border-radius: 100px;
+      margin-bottom: 2rem;
+      width: fit-content;
+      animation: fadeUp 0.8s ease both;
+    }
+    .hero-name {
+      font-family: var(--heading-font);
+      font-weight: 800;
+      font-size: clamp(3rem, 8vw, 6.5rem);
+      line-height: 0.95;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.5rem;
+      animation: fadeUp 0.8s 0.1s ease both;
+    }
+    .hero-name span { color: var(--accent); display: block; }
+    .hero-desc {
+      max-width: 580px;
+      color: var(--muted);
+      font-size: 1.1rem;
+      font-weight: 300;
+      line-height: 1.8;
+      margin-bottom: 2.5rem;
+      animation: fadeUp 0.8s 0.2s ease both;
+    }
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      animation: fadeUp 0.8s 0.3s ease both;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.85rem 1.8rem;
+      border-radius: 6px;
+      font-family: var(--heading-font);
+      font-weight: 600;
+      font-size: 0.9rem;
+      letter-spacing: 0.03em;
+      text-decoration: none;
+      transition: all 0.2s;
+      border: none;
+      cursor: pointer;
+    }
+    .btn-primary { background: var(--accent); color: var(--bg); }
+    .btn-primary:hover {
+      background: #5ef4c3;
+      transform: translateY(-1px);
+      box-shadow: 0 8px 30px rgba(59,232,176,0.3);
+    }
+    .btn-outline { background: transparent; color: var(--text); border: 1px solid var(--border); }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 2.5rem; left: 4rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      color: var(--muted);
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      animation: fadeUp 0.8s 0.6s ease both;
+    }
+    .scroll-line { width: 40px; height: 1px; background: var(--muted); }
+
+    /* SECTION COMMON */
+    section {
+      padding: 6rem 4rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .section-label {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 3rem;
+    }
+    .section-label .label-line { width: 40px; height: 2px; background: var(--accent); }
+    .section-label span {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    .section-title {
+      font-family: var(--heading-font);
+      font-weight: 800;
+      font-size: clamp(2rem, 4vw, 3rem);
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+    }
+    .section-title .dim { color: var(--muted); }
+
+    /* ABOUT */
+    #about { border-top: 1px solid var(--border); }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+      margin-top: 3rem;
+    }
+    .about-text p {
+      color: var(--muted);
+      font-weight: 300;
+      margin-bottom: 1.2rem;
+    }
+    .about-text p strong { color: var(--text); font-weight: 500; }
+    .about-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.2rem;
+    }
+    .stat-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.4rem;
+      transition: border-color 0.2s;
+    }
+    .stat-card:hover { border-color: var(--accent); }
+    .stat-num {
+      font-family: var(--heading-font);
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 0.4rem;
+    }
+    .stat-label { font-size: 0.78rem; color: var(--muted); font-weight: 400; }
+    .skills-row { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 2rem; }
+    .skill-tag {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 0.3rem 0.75rem;
+      font-size: 0.78rem;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+      font-weight: 500;
+    }
+
+    /* RESUME */
+    #resume { border-top: 1px solid var(--border); }
+    .resume-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.6fr;
+      gap: 4rem;
+      margin-top: 3rem;
+    }
+    .resume-col-title {
+      font-family: var(--heading-font);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.4rem;
+    }
+    .resume-entry {
+      position: relative;
+      padding-left: 1.2rem;
+      border-left: 2px solid var(--border);
+      margin-bottom: 2rem;
+      transition: border-color 0.2s;
+    }
+    .resume-entry:hover { border-color: var(--accent); }
+    .resume-entry-title {
+      font-family: var(--heading-font);
+      font-weight: 700;
+      font-size: 0.98rem;
+      margin-bottom: 0.2rem;
+    }
+    .resume-entry-sub {
+      font-size: 0.83rem;
+      color: var(--accent2);
+      margin-bottom: 0.25rem;
+      font-weight: 500;
+    }
+    .resume-entry-date {
+      font-size: 0.73rem;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+    }
+    .resume-entry-desc { font-size: 0.85rem; color: var(--muted); font-weight: 300; }
+    .resume-right .resume-entry-desc { margin-top: 0.4rem; }
+    .resume-right .resume-entry-desc li {
+      list-style: none;
+      padding-left: 1.1rem;
+      position: relative;
+      margin-bottom: 0.3rem;
+    }
+    .resume-right .resume-entry-desc li::before {
+      content: '\2192';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-size: 0.78rem;
+    }
+
+    /* AP / scores strip */
+    .scores-strip {
+      display: flex;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+      margin-top: 0.8rem;
+    }
+    .score-pill {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 0.35rem 0.75rem;
+      font-size: 0.78rem;
+      color: var(--text);
+    }
+    .score-pill span { color: var(--accent); font-weight: 600; margin-left: 0.3rem; }
+
+    /* PROJECTS */
+    #projects { border-top: 1px solid var(--border); }
+    .project-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      margin-bottom: 3rem;
+      display: grid;
+      grid-template-columns: 1fr 1.3fr;
+      transition: border-color 0.25s, transform 0.25s;
+    }
+    .project-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+    .project-visual {
+      padding: 3rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background: var(--surface2);
+      border-right: 1px solid var(--border);
+      min-height: 340px;
+    }
+    .project-number {
+      font-family: var(--heading-font);
+      font-size: 5rem;
+      font-weight: 800;
+      color: var(--border);
+      line-height: 1;
+    }
+    .project-icon { font-size: 3.2rem; filter: drop-shadow(0 0 20px rgba(59,232,176,0.4)); }
+    .project-badges { display: flex; flex-direction: column; gap: 0.5rem; }
+    .project-award {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent3);
+      border: 1px solid rgba(240,160,75,0.3);
+      padding: 0.3rem 0.7rem;
+      border-radius: 100px;
+      width: fit-content;
+    }
+    .project-award.blue {
+      color: var(--accent2);
+      border-color: rgba(92,124,250,0.3);
+    }
+    .project-content { padding: 3rem; }
+    .project-meta { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem; }
+    .project-tag {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      padding: 0.22rem 0.6rem;
+      border-radius: 4px;
+    }
+    .project-title {
+      font-family: var(--heading-font);
+      font-weight: 800;
+      font-size: 1.75rem;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.4rem;
+    }
+    .project-course { font-size: 0.8rem; color: var(--accent); font-weight: 500; margin-bottom: 1.2rem; }
+    .project-desc { color: var(--muted); font-size: 0.9rem; font-weight: 300; line-height: 1.8; margin-bottom: 1.4rem; }
+    .project-section-title {
+      font-family: var(--heading-font);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent2);
+      margin-bottom: 0.4rem;
+      margin-top: 1rem;
+    }
+    .project-learn { color: var(--muted); font-size: 0.87rem; font-weight: 300; }
+    .project-skills-row { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1.2rem; }
+    .project-skill {
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 0.22rem 0.6rem;
+      border-radius: 4px;
+      background: rgba(59,232,176,0.08);
+      border: 1px solid rgba(59,232,176,0.2);
+      color: var(--accent);
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 3rem 4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .footer-name { font-family: var(--heading-font); font-weight: 700; font-size: 1rem; }
+    .footer-name span { color: var(--accent); }
+    .footer-links { display: flex; gap: 1.5rem; list-style: none; }
+    .footer-links a { color: var(--muted); text-decoration: none; font-size: 0.82rem; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--accent); }
+    .footer-right { font-size: 0.78rem; color: var(--muted); }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    .divider { height: 1px; background: linear-gradient(90deg, transparent, var(--border), transparent); margin: 0 4rem; }
+
+    @media (max-width: 900px) {
+      nav { padding: 1rem 2rem; }
+      .nav-links { gap: 1.5rem; }
+      .hero { padding: 7rem 2rem 4rem; }
+      section { padding: 4rem 2rem; }
+      .about-grid, .resume-grid, .project-card { grid-template-columns: 1fr; }
+      .project-visual { border-right: none; border-bottom: 1px solid var(--border); min-height: auto; }
+      footer { padding: 2rem; flex-direction: column; align-items: flex-start; }
+      .divider { margin: 0 2rem; }
+    }
+    @media (max-width: 600px) {
+      .nav-links { display: none; }
+      .about-stats { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="#" class="nav-logo">IM/</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#resume">Resume</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="https://www.linkedin.com/in/imranmuhammadmirza" target="_blank">LinkedIn</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-glow"></div>
+    <div class="hero-glow2"></div>
+    <div class="hero-tag">AI Researcher &bull; Builder &bull; Founder</div>
+    <h1 class="hero-name">
+      Imran
+      <span>Mirza.</span>
+    </h1>
+    <p class="hero-desc">
+      High school AI researcher with work accepted to ICLR and NAACL.
+      Congressional App Challenge winner. Founder. Emerald High School, Dublin CA.
+      Building technology that matters.
+    </p>
+    <div class="hero-cta">
+      <a href="#projects" class="btn btn-primary">View Projects</a>
+      <a href="#resume" class="btn btn-outline">Resume</a>
+    </div>
+    <div class="hero-scroll">
+      <div class="scroll-line"></div>
+      Scroll to explore
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-label reveal">
+      <div class="label-line"></div>
+      <span>About Me</span>
+    </div>
+
+    <h2 class="section-title reveal">
+      Researcher. Builder.<br>
+      <span class="dim">Community Leader.</span>
+    </h2>
+
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <p>
+          I'm <strong>Imran Mirza</strong>, a junior at <strong>Emerald High School</strong>
+          in Dublin, CA with a 4.00 unweighted GPA. I am an AI researcher, founder, and
+          community organizer who has spent the past few years building at the intersection of
+          machine learning research and real-world impact.
+        </p>
+        <p>
+          My research on implicit bias in multi-agent AI systems has been accepted to two
+          top-tier venues: <strong>ICLR</strong> and <strong>NAACL</strong>. I also co-founded
+          my school's AI Club, which has grown to over 60 members, and I won the
+          <strong>Congressional App Challenge</strong> for California's 10th District for
+          building a Parkinson's disease detection app.
+        </p>
+        <p>
+          Beyond research, I founded and ran an entrepreneurship bootcamp for high school
+          students, bringing UC Berkeley professors to teach and hosting a final pitch event
+          on the Berkeley campus. I care about using technology as a lever for community impact,
+          whether that is a research paper, a mobile app for a local mosque, or a student summit
+          that brought 300+ students together.
+        </p>
+        <div class="skills-row">
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">Machine Learning</span>
+          <span class="skill-tag">NLP / LLMs</span>
+          <span class="skill-tag">Multi-Agent Systems</span>
+          <span class="skill-tag">App Development</span>
+          <span class="skill-tag">Research Design</span>
+          <span class="skill-tag">Statistical Analysis</span>
+          <span class="skill-tag">Data Science</span>
+          <span class="skill-tag">JavaScript</span>
+          <span class="skill-tag">Public Speaking</span>
+          <span class="skill-tag">Event Organizing</span>
+        </div>
+      </div>
+
+      <div class="about-stats reveal">
+        <div class="stat-card">
+          <div class="stat-num">ICLR</div>
+          <div class="stat-label">Research accepted to ICLR and NAACL, two of the most competitive AI/NLP venues</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">1st</div>
+          <div class="stat-label">Place, 2025 Congressional App Challenge, California's 10th District</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">60+</div>
+          <div class="stat-label">Members in the AI Club I co-founded at Emerald High School</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">4.47</div>
+          <div class="stat-label">Weighted GPA &bull; SAT 1530 &bull; AP Scholar with Honor</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">300+</div>
+          <div class="stat-label">Students across 5+ Bay Area schools at the Emerald High Summit I helped organize</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">200+</div>
+          <div class="stat-label">Downloads for the mosque mobile app I built and launched on Eid</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- RESUME -->
+  <section id="resume">
+    <div class="section-label reveal">
+      <div class="label-line"></div>
+      <span>Resume</span>
+    </div>
+
+    <h2 class="section-title reveal">
+      Experience &amp;<br>
+      <span class="dim">Education.</span>
+    </h2>
+
+    <div class="resume-grid">
+      <!-- LEFT -->
+      <div class="resume-left reveal">
+        <div class="resume-col-title">Education</div>
+
+        <div class="resume-entry">
+          <div class="resume-entry-title">Emerald High School</div>
+          <div class="resume-entry-sub">Dublin Unified School District, CA</div>
+          <div class="resume-entry-date">2022 &ndash; 2026 (Expected)</div>
+          <div class="resume-entry-desc">
+            GPA: 4.00 Unweighted / 4.47 Weighted<br><br>
+            AP Coursework: Calculus BC, Computer Science Principles, Physics, Psychology,
+            Statistics, US History, AP Lang &amp; Composition, Honors Chemistry, World History: Modern
+          </div>
+        </div>
+
+        <div class="resume-col-title" style="margin-top:2rem;">Test Scores</div>
+
+        <div class="resume-entry">
+          <div class="resume-entry-title">SAT: 1530</div>
+          <div class="resume-entry-desc">790 Math &bull; 740 Reading &amp; Writing</div>
+        </div>
+
+        <div class="resume-entry">
+          <div class="resume-entry-title">AP Exams</div>
+          <div class="resume-entry-sub">AP Scholar with Honor (2025)</div>
+          <div class="scores-strip">
+            <div class="score-pill">Calculus BC <span>5</span></div>
+            <div class="score-pill">CS Principles <span>5</span></div>
+            <div class="score-pill">World History <span>5</span></div>
+            <div class="score-pill">Seminar <span>3</span></div>
+          </div>
+        </div>
+
+        <div class="resume-col-title" style="margin-top:2rem;">Additional Coursework</div>
+
+        <div class="resume-entry">
+          <div class="resume-entry-title">Harvard AI/ML Bootcamp</div>
+          <div class="resume-entry-desc">Completed intensive program covering supervised learning, neural networks, and applied ML.</div>
+        </div>
+
+        <div class="resume-entry">
+          <div class="resume-entry-title">UC Berkeley Data Science Bootcamp</div>
+          <div class="resume-entry-desc">Completed program covering data analysis, visualization, and statistical modeling in Python.</div>
+        </div>
+
+        <div class="resume-col-title" style="margin-top:2rem;">Awards</div>
+
+        <div class="resume-entry">
+          <div class="resume-entry-title">Congressional App Challenge</div>
+          <div class="resume-entry-sub">1st Place &ndash; California's 10th District</div>
+          <div class="resume-entry-date">December 2025</div>
+        </div>
+
+        <div class="resume-entry">
+          <div class="resume-entry-title">AP Scholar with Honor</div>
+          <div class="resume-entry-sub">College Board</div>
+          <div class="resume-entry-date">2025</div>
+        </div>
+      </div>
+
+      <!-- RIGHT -->
+      <div class="resume-right reveal">
+        <div class="resume-col-title">Experience</div>
+
+        <div class="resume-entry">
+          <div class="resume-entry-title">AI Researcher (Published)</div>
+          <div class="resume-entry-sub">Independent Research</div>
+          <div class="resume-entry-date">2024 &ndash; Present</div>
+          <div class="resume-entry-desc">
+            <ul>
+              <li>Identified an unexplored research gap: implicit bias in multi-agent AI systems (prior work had only studied single-agent systems).</li>
+              <li>Led the methodology design, introducing task-based scenarios and multi-agent judging frameworks.</li>
+              <li>Research accepted to ICLR (International Conference on Learning Representations) and NAACL (North American Chapter of the Association for Computational Linguistics).</li>
+              <li>Completed a second research internship with a college professor; paper submitted and under review.</li>
+              <li>Currently leading a third paper on advanced cost-effective multi-agent orchestration, including dataset construction and evaluation metric design.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="resume-entry">
+          <div class="resume-entry-title">Co-Founder &amp; Vice President, AI Club</div>
+          <div class="resume-entry-sub">Emerald High School</div>
+          <div class="resume-entry-date">2023 &ndash; Present</div>
+          <div class="resume-entry-desc">
+            <ul>
+              <li>Co-founded the school's AI Club, which has grown to 60+ members.</li>
+              <li>Plan weekly meetings, design hands-on AI projects, and organize events including hackathons.</li>
+              <li>Invited AI industry professionals and researchers to speak to the club.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="resume-entry">
+          <div class="resume-entry-title">Founder &amp; Organizer, Entrepreneurship Bootcamp</div>
+          <div class="resume-entry-sub">UC Berkeley Campus</div>
+          <div class="resume-entry-date">2024</div>
+          <div class="resume-entry-desc">
+            <ul>
+              <li>Founded and ran a fully self-organized entrepreneurship bootcamp for ~20 high school students.</li>
+              <li>Designed curriculum, invited two UC Berkeley professors to lead sessions, and handled all logistics and finances.</li>
+              <li>Hosted the final pitch event on the UC Berkeley campus where students presented to real entrepreneurs.</li>
+              <li>Bootcamp generated approximately $5,000 in profit.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="resume-entry">
+          <div class="resume-entry-title">Research &amp; Technology Lead</div>
+          <div class="resume-entry-sub">Local Community Center (Mosque)</div>
+          <div class="resume-entry-date">2023 &ndash; Present</div>
+          <div class="resume-entry-desc">
+            <ul>
+              <li>Built and launched a mobile application for the local mosque, released on Eid.</li>
+              <li>App received over 200 downloads and continues to be maintained and improved.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="resume-entry">
+          <div class="resume-entry-title">Lead Student Organizer, Emerald High Summit</div>
+          <div class="resume-entry-sub">Emerald High School</div>
+          <div class="resume-entry-date">2024 &ndash; 2025</div>
+          <div class="resume-entry-desc">
+            <ul>
+              <li>One of the lead organizers for a summit bringing together 300+ students from 5+ Bay Area schools.</li>
+              <li>Led the business track: recruited participants, organized pitch sessions, invited business professionals to judge, and ran panel discussions.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="section-label reveal">
+      <div class="label-line"></div>
+      <span>Projects</span>
+    </div>
+
+    <h2 class="section-title reveal">
+      Things I've<br>
+      <span class="dim">Built &amp; Researched.</span>
+    </h2>
+
+    <!-- PROJECT 1 -->
+    <div class="project-card reveal">
+      <div class="project-visual">
+        <div class="project-number">01</div>
+        <div class="project-icon">&#129504;</div>
+        <div class="project-badges">
+          <div class="project-award">&#127942; 1st Place &mdash; Congressional App Challenge</div>
+          <div class="project-award">&#9889; CA-10 District Winner</div>
+        </div>
+      </div>
+      <div class="project-content">
+        <div class="project-meta">
+          <span class="project-tag">Machine Learning</span>
+          <span class="project-tag">App Development</span>
+          <span class="project-tag">Healthcare AI</span>
+          <span class="project-tag">Python</span>
+        </div>
+        <h3 class="project-title">Synapse Match</h3>
+        <div class="project-course">Computer Science &bull; Emerald High School &bull; Fall 2025</div>
+        <p class="project-desc">
+          Synapse Match is an AI application that detects early-stage indicators of Parkinson's
+          disease. Inspired by our physics teacher's unexpected diagnosis, our team of four juniors
+          built a system that analyzes three input types simultaneously: a user survey, an audio
+          recording for vocal analysis, and a motor assessment. These signals feed into a prediction
+          pipeline that estimates the likelihood of Parkinson's onset. The app won first place in
+          California's 10th Congressional District, recognized by Congressman Mark DeSaulnier.
+        </p>
+
+        <div class="project-section-title">My Responsibilities</div>
+        <p class="project-learn">
+          I trained the machine learning model, built the core app, and designed the full data
+          processing and prediction pipeline from raw inputs through to the final risk output.
+        </p>
+
+        <div class="project-section-title">What I Learned</div>
+        <p class="project-learn">
+          Working under a real competition deadline with meaningful stakes taught me to make fast,
+          confident engineering decisions. I learned how to preprocess noisy multimodal data,
+          handle the tradeoffs between model accuracy and interpretability in a healthcare context,
+          and build something people can actually trust. The human-centered problem motivated
+          every technical choice we made.
+        </p>
+
+        <div class="project-skills-row">
+          <span class="project-skill">Python</span>
+          <span class="project-skill">Audio Analysis</span>
+          <span class="project-skill">ML Pipeline Design</span>
+          <span class="project-skill">Data Preprocessing</span>
+          <span class="project-skill">Model Training</span>
+          <span class="project-skill">App Development</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROJECT 2 -->
+    <div class="project-card reveal">
+      <div class="project-visual">
+        <div class="project-number">02</div>
+        <div class="project-icon">&#128202;</div>
+        <div class="project-badges">
+          <div class="project-award">&#128240; Accepted to ICLR 2026</div>
+          <div class="project-award blue">&#128240; Accepted to NAACL 2026</div>
+        </div>
+      </div>
+      <div class="project-content">
+        <div class="project-meta">
+          <span class="project-tag">AI Research</span>
+          <span class="project-tag">Multi-Agent Systems</span>
+          <span class="project-tag">AI Bias</span>
+          <span class="project-tag">NLP</span>
+          <span class="project-tag">Published</span>
+        </div>
+        <h3 class="project-title">Bias in Multi-Agent AI Systems</h3>
+        <div class="project-course">Independent Research &bull; 2024&ndash;2025</div>
+        <p class="project-desc">
+          Prior research had studied implicit bias in single AI systems, but almost no work had
+          looked at how bias behaves when AI models interact with each other. I identified this
+          gap and designed a research study to explore it. The core question: does bias get
+          amplified when agents interact? To test this, I introduced task-based scenarios and
+          a multi-agent judging framework that had not been used before in this context. The
+          paper was accepted to both ICLR and NAACL, two of the most selective venues in the
+          AI and NLP research community.
+        </p>
+
+        <div class="project-section-title">My Responsibilities</div>
+        <p class="project-learn">
+          I came up with the original research idea, led the experiment design and methodology,
+          and was the primary contributor to the multi-agent judging framework. I contributed
+          significantly to the paper write-up and analysis of results.
+        </p>
+
+        <div class="project-section-title">What I Learned</div>
+        <p class="project-learn">
+          This project taught me how to go from a vague intuition ("do multi-agent systems
+          amplify bias?") to a rigorous, peer-reviewed methodology. I learned how to conduct
+          a literature review at a real research level, how to design experiments that isolate
+          variables cleanly, and how to write about findings precisely enough to satisfy
+          reviewers at top-tier academic conferences.
+        </p>
+
+        <div class="project-skills-row">
+          <span class="project-skill">Research Design</span>
+          <span class="project-skill">Multi-Agent Systems</span>
+          <span class="project-skill">LLM Evaluation</span>
+          <span class="project-skill">Statistical Analysis</span>
+          <span class="project-skill">Python</span>
+          <span class="project-skill">Academic Writing</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-name">Imran <span>Mirza</span></div>
+    <ul class="footer-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#resume">Resume</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="https://www.linkedin.com/in/imranmuhammadmirza" target="_blank">LinkedIn &#8599;</a></li>
+    </ul>
+    <div class="footer-right">Emerald High School &bull; Dublin, CA &bull; Class of 2026</div>
+  </footer>
+
+  <script>
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.1 });
+    reveals.forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
